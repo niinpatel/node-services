@@ -5,21 +5,19 @@ function printDirHeirarchy(dir) {
 
     console.log(dir);
     let files = fs.readdirSync(dir);
-        if(files){
-            for(let file of files){
-                filepath = dir + '/' + file;
-                let stat = fs.statSync(filepath);
-                if(stat.isFile()){
-                    console.log(filepath);
-                }
-                else{
-                    printDirHeirarchy(filepath);
-                }
-
-            }
+    let filePath;
+    for (let file of files) {
+        filePath = dir + '/' + file;
+        let stat = fs.statSync(filePath);
+        if (stat.isFile()) {
+            console.log(filePath);
+        }
+        else {
+            printDirHeirarchy(filePath);
         }
 
+    }
 }
 
-printDirHeirarchy('.');
+printDirHeirarchy(__dirname);
 
