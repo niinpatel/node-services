@@ -1,23 +1,9 @@
-const fs = require('fs');
+const dirTree = require('directory-tree');
 
-
-function printDirHeirarchy(dir) {
-
-    console.log(dir);
-    let files = fs.readdirSync(dir);
-    let filePath;
-    for (let file of files) {
-        filePath = dir + '/' + file;
-        let stat = fs.statSync(filePath);
-        if (stat.isFile()) {
-            console.log(filePath);
-        }
-        else {
-            printDirHeirarchy(filePath);
-        }
-
-    }
+function getDirTree(path) {
+    return dirTree(path);
 }
 
-printDirHeirarchy(__dirname);
 
+const tree = getDirTree('.');
+console.log(JSON.stringify(tree));
